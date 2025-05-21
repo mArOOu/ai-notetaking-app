@@ -1,27 +1,29 @@
 "use client";
 
-import React from "react";
-import { Button } from "./ui/button";
 import { Loader2 } from "lucide-react";
+import { Button } from "./ui/button";
+import { useState } from "react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { logOutAction } from "@/actions/user";
 
-function LogoutButton() {
-  const Router = useRouter();
+function LogOutButton() {
+  // Removed useSonner, using toast directly
+  const router = useRouter();
 
-  const [loading, setLoading] = React.useState(false);
-  const handleLogout = async () => {
+  const [loading, setLoading] = useState(false);
+
+  const handleLogOut = async () => {
     setLoading(true);
 
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-
-    const errorMessage = null;
+    const { errorMessage } = await logOutAction();
 
     if (!errorMessage) {
-      toast("You have been logged out successfully.");
-      Router.push("/");
+      router.push(`/?toastType=logOut`);
     } else {
-      toast.error(errorMessage);
+      toast.error(errorMessage, {
+        description: "Error",
+      });
     }
 
     setLoading(false);
@@ -29,14 +31,14 @@ function LogoutButton() {
 
   return (
     <Button
-      className="width-24"
-      variant={"outline"}
-      onClick={handleLogout}
+      variant="outline"
+      onClick={handleLogOut}
       disabled={loading}
+      className="w-24"
     >
       {loading ? <Loader2 className="animate-spin" /> : "Log Out"}
     </Button>
   );
 }
 
-export default LogoutButton;
+export default LogOutButton;

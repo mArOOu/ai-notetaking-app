@@ -3,10 +3,11 @@ import Image from "next/image";
 import { shadow } from "@/styles/utils";
 import { Button } from "./ui/button";
 import DarkModeToggle from "./DarkModeToggle";
-import LogoutButton from "./LogoutButton";
+import LogoutButton from "./LogOutButton";
+import { getUser } from "@/auth/server";
 
-function Header() {
-  const user = 1;
+async function Header() {
+  const user = await getUser();
 
   return (
     <header
