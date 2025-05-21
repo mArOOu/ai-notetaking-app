@@ -1,8 +1,3 @@
 export default function Home() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <h1 className="text-4xl font-bold">AI Notes</h1>
-      <p className="mt-4 text-lg">Your personal AI note-taking assistant.</p>
-    </main>
-  );
+  return <h1 className="text-4xl font-bold">Goat Notes</h1>;
 }
