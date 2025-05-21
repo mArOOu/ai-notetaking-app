@@ -1,6 +1,5 @@
-import { Card, CardHeader, CardTitle } from "@/components/ui/card";
-import React from "react";
 import AuthForm from "@/components/AuthForm";
+import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 
 function LoginPage() {
   return (
@@ -9,6 +8,7 @@ function LoginPage() {
         <CardHeader className="mb-4">
           <CardTitle className="text-center text-3xl">Login</CardTitle>
         </CardHeader>
+
         <AuthForm type="login" />
       </Card>
     </div>
