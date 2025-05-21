@@ -3,12 +3,12 @@
 import { Loader2 } from "lucide-react";
 import { Button } from "./ui/button";
 import { useState } from "react";
-import { toast } from "sonner";
+import { useToast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
-import { logOutAction } from "@/actions/user";
+import { logOutAction } from "@/actions/users";
 
 function LogOutButton() {
-  // Removed useSonner, using toast directly
+  const { toast } = useToast();
   const router = useRouter();
 
   const [loading, setLoading] = useState(false);
@@ -21,8 +21,10 @@ function LogOutButton() {
     if (!errorMessage) {
       router.push(`/?toastType=logOut`);
     } else {
-      toast.error(errorMessage, {
-        description: "Error",
+      toast({
+        title: "Error",
+        description: errorMessage,
+        variant: "destructive",
       });
     }
 
